@@ -120,7 +120,8 @@ func (t *Case) CreateNamespace(test *testing.T, cl client.Client, ns *namespace)
 
 	return cl.Create(ctx, &corev1.Namespace{
 		ObjectMeta: metav1.ObjectMeta{
-			Name: ns.Name,
+			Name:   ns.Name,
+			Labels: map[string]string{"pod-security.kubernetes.io/enforce": "privileged"},
 		},
 		TypeMeta: metav1.TypeMeta{
 			Kind: "Namespace",

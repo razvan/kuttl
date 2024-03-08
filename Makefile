@@ -33,11 +33,7 @@ help: ## Show this help screen
 
 .PHONY: lint
 lint: ## Run golangci-lint
-ifneq (${GOLANGCI_LINT_VER}, "$(shell ./bin/golangci-lint version --format short 2>&1)")
-	@echo "golangci-lint missing or not version '${GOLANGCI_LINT_VER}', downloading..."
-	curl -sSfL "https://raw.githubusercontent.com/golangci/golangci-lint/v${GOLANGCI_LINT_VER}/install.sh" | sh -s -- -b ./bin "v${GOLANGCI_LINT_VER}"
-endif
-	./bin/golangci-lint --timeout 5m run --build-tags integration
+	golangci-lint --timeout 5m run --build-tags integration
 	
 .PHONY: download
 download:  ## Downloads go dependencies
